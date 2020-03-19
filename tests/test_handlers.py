@@ -17,16 +17,20 @@ def test_display(fixture_client):
 	result = fixture_client.get('/display')
 	assert result.status_code == 200
 
+def test_view(fixture_client):
+	result = fixture_client.get('/')
+	assert result.status_code == 200
 
-def test_add_user_success(
-        mocker, distribution_format_media_types):
-    """Test successful retrieval of distribution_format_media types."""
-    mocker.patch.object(
-        distribution_format_media, 'get_all_media_types',
-        return_value=response.Response(
-            status=200, message=distribution_format_media_types))
 
-    result = product_configuration.get_distribution_format_media_types()
+# def test_add_user_success(
+#         mocker, distribution_format_media_types):
+#     """Test successful retrieval of distribution_format_media types."""
+#     mocker.patch.object(
+#         distribution_format_media, 'get_all_media_types',
+#         return_value=response.Response(
+#             status=200, message=distribution_format_media_types))
+
+#     result = product_configuration.get_distribution_format_media_types()
 
 
 
