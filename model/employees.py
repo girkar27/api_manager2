@@ -1,18 +1,12 @@
-# from sqlalchemy import create_engine, MetaData
-# from sqlalchemy.ext.declarative import declarative_base
-# #import pymysql
-# from sqlalchemy.orm import sessionmaker
+from model.skills import Skills
+from model.address import Address
+from model.address_emp_id import Address_emp_id
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.dialects import mysql
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey 
 from sqlalchemy.orm import relationship
-from model.skills import Skills
-from config import DB_URI, Base, session
-
-
-
-
+from mysql import Base, session
 
 
 
@@ -23,6 +17,8 @@ class Employee(Base):
     lastname = Column(String(30))
     age = Column(Integer)
     skills = relationship("Skills", back_populates="employees")   
+    address = relationship("Address", back_populates="employees")   
+    address_emp_id = relationship("Address_emp_id", back_populates="employees")   
 
     def __repr__(self):
         return "Employee(%r %r %r)" % (self.firstname, self.lastname, self.age)
@@ -30,22 +26,34 @@ class Employee(Base):
 
 #Employee.skills = relationship("skills.Skills", back_populates="employee")
 
-    def commit_user_details(self):
-        try:
-            session.add(self)
-            session.commit()
-        except Exception as e:
-            return ("cannot commit changes in the database")
+    # def commit_user_details(self):
+    #     try:
+    #         session.add(self)
+    #         session.commit()
+    #     except Exception as e:
+    #         return ("cannot commit changes in the database")
 
-        # if firstname.islower():
-        #     upper_lastname = lastname.upper(self)
-        #session.flush(self)
-        # import pdb
-        # pdb.set_trace()
-    #session.flush()
-    
+def delete_user_data(user):
+    session.delete(user)
 
+        
 
+def get_user_details(firstname, lastname, age):
+    abc = Employee(firstname=firstname, lastname=lastname, age=age)
+    # return abc        
+    session.add(abc)    
+    session.commit()
+
+def query_id(firstname):
+    user_id = session.query(Employee).filter_by(firstname=firstname).first()
+    x = user_id.id
+    return x    
+
+def fetch_user_id(id):
+    a = session.query(Employee).get(id)
+    return a
+
+    # session.commit()
 
 
 

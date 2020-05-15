@@ -1,18 +1,24 @@
+import handlers
 import pytest
-import app
+import api
 
 
-@pytest.fixture
-def supply_url():
-	return "http://127.0.0.1:5000/"
+# @pytest.fixture
+# def supply_url():
+	# return "http://127.0.0.1:5000/"
 
 
 @pytest.fixture
 def fixture_client():
     """Create an api test client fixture."""
-    return app.a.test_client()
+    return handlers.a.test_client()
+
 
 # @pytest.fixture
-# def fixture_client():
-#     """Create an api test client fixture."""
-#     return a.test_client()
+# def client_headers():
+#     x = {"firstname":"jai","lastname":"girkar", "age":22,"skills":"python"}
+#     return x
+
+
+
+
