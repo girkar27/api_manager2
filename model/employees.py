@@ -33,8 +33,10 @@ class Employee(Base):
     #     except Exception as e:
     #         return ("cannot commit changes in the database")
 
-def delete_user_data(user):
-    session.delete(user)
+def delete_user_data(id):
+    session.query(Employee).filter_by(id=id).delete()
+
+    # return x
 
         
 
@@ -53,6 +55,15 @@ def fetch_user_id(id):
     a = session.query(Employee).get(id)
     return a
 
+def display_all():
+    i = session.query(Employee).all()
+    return i
+    # import pdb
+    # pdb.set_trace()
+
+    # for user in i:
+
+
     # session.commit()
 
 
@@ -65,6 +76,11 @@ def fetch_user_id(id):
 # stmt = select([Employee]).select_from(j)
 # result = conn.execute(stmt)
 # result.fetchall()
+
+
+
+
+
 
 
 

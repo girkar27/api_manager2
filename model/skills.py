@@ -33,8 +33,10 @@ class Skills(Base):
     #     except Exception as e:
     #         return ("cannot add skills")
 
-def delete_skill_data(skill_obj):
-    session.delete(skill_obj)
+def delete_skill_data(id):
+    session.query(Skills).filter_by(emp_id=id).delete()
+
+
 
 def get_user_skill(emp_id,tech1):
     user_skill = Skills(emp_id=emp_id, tech=tech1)
@@ -54,4 +56,9 @@ def filter_skill_id(id):
 # def commit_user_skill():
 #   session.add(sel00f)
 #     #session.commit()
+
+
+def get_skill():
+    i = session.query(Skills).all()
+    return i
 

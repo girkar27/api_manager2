@@ -23,8 +23,8 @@ class Address(Base):
 
 
 
-def delete_address_data(address_obj):
-    session.delete(address_obj)
+def delete_address_data(id):
+    session.query(Address).filter_by(emp_id=id).delete()
 
 
 def get_user_address(emp_id, emp_address):
@@ -36,4 +36,8 @@ def get_user_address(emp_id, emp_address):
 def filter_address_id(id):
     address_id1 = session.query(Address).filter_by(emp_id=id).first()
     return address_id1
+
+def display_address():
+    i= session.query(Address).all()
+    return i
 

@@ -16,11 +16,11 @@ from flask import g
 from oto import response
 # from oto.adaptors.flask import flaskify
 
-Base.metadata.create_all(engine)
+# Base.metadata.create_all(engine)
 
 
 #add--------------------------------------------------
-@a.route("/", methods=["POST","GET"])
+@a.route("/adduser", methods=["POST","GET"])
 def view():
     result1 = logic.add_user()
 
@@ -51,6 +51,20 @@ def dislay_by_user(id):
     final_display = logic.display_user(id)
     return jsonify(final_display)
 
+
+@a.route("/api", methods=["GET"])
+def api():
+    return {
+        "id": 1,
+        "name": "jai",
+        "age": 30,
+        "skills":"python"
+    }
+
+@a.route("/display", methods=["GET"])
+def display():
+    display_one = logic.display_all_users()
+    return jsonify(display_one)
 
 
 # @a.errorhandler(500)

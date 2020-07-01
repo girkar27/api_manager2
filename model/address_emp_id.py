@@ -36,5 +36,5 @@ def filter_address_skill_id(id):
     return address_skill_id
 
 
-def delete_add_skill_data(address_skill_obj):
-    session.delete(address_skill_obj)
+def delete_add_skill_data(id):
+    session.query(Address_emp_id).filter_by(emp_id=id).delete()
